@@ -2,3 +2,7 @@ body {
   background-color: #2F2E2C;
 }
 
+nav > * {
+  font-size: xx-large;
+}
+
