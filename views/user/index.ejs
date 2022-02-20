@@ -1,0 +1,20 @@
+<%-include("../partials/header.ejs")%>
+<main>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for(let i = 0; i < users.recordset.length; i++){ %>
+                <tr>
+                    <td><%=users.recordset[i].FIRST_NAME%></td>
+                    <td><%=users.recordset[i].LAST_NAME%></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</main>
+<%-include("../partials/footer.ejs")%>

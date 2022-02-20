@@ -1,9 +1,12 @@
 var express = require('express');
 var router = express.Router();
+const usersController = require('../controllers/usersController')
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('Database needs to be implemented first so that we can pull stored users');
+router.get('/', async function(req, res, next) {
+  let users = await usersController.getUsers()
+  console.log(users)
+  res.render('user/index', {users : users});
 });
 
 /*Form page for creating a new User*/
