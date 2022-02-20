@@ -1,9 +1,30 @@
+:root {
+  --primary-bg : #9A8F97;
+  --secondary-bg: #403F4C;
+  --primary-text: #EDFFEC;
+  --blue: #4BA3C3;
+  --green: #1B998B;
+}
 body {
-  background-color: #2F2E2C;
-  color: white;
+  background-color:var(--primary-bg);
+
 }
 
 nav > * {
   font-size: xx-large;
+  color: white
+}
+
+
+form > * {
+  color: white;
+}
+
+.bg-second{
+  background-color: var(--secondary-bg);
+}
+
+.btn-primary{
+  background-color: var(--blue);
 }
 
