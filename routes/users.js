@@ -5,7 +5,6 @@ const usersController = require('../controllers/usersController')
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
   let users = await usersController.getUsers()
-  console.log(users)
   res.render('user/index', {users : users});
 });
 
@@ -15,7 +14,7 @@ router.get('/new', (req,res)=>{
 })
 
 router.post('/new', (req, res)=>{
-  res.send('Future comfirmation page, or potentially reload the form for the user to create an additional employee record')
+  usersController.addUser(req, res);
 })
 
 module.exports = router;
