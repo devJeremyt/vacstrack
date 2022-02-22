@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config()
+var passport = require('passport')
+var session = require('express-session')
+var localStrategy = require('passport-local').Strategy
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -22,6 +25,43 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: 'rando secret',
+  resave: true,
+  saveUninitialized: false,
+  cookie: {maxAge:60000, secure: false}
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.use('local', new localStrategy({
+  passReqToCallback: true,
+  usernameField: 'username'
+},
+  function(req, username, password, done){
+    //Search for user in DB
+
+    //If exist check that password matches
+
+    //If matches
+    done(null, user)
+
+    //Else
+    done(null, false, {message: 'Username or password was incorrect'})
+  }
+))
+
+passport.serializeUser(function(user, done){
+  done(null, user.id);
+})
+
+passport.deserializeUser(function(id, done){
+  //Run DB query to find user
+})
+
+
 
 
 app.use('/', indexRouter);
