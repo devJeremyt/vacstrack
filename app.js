@@ -7,6 +7,7 @@ require('dotenv').config()
 var passport = require('passport')
 var session = require('express-session')
 var localStrategy = require('passport-local').Strategy
+const { poolPromise, sql } = require('./db')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -38,27 +39,46 @@ app.use(passport.session())
 
 passport.use('local', new localStrategy({
   passReqToCallback: true,
-  usernameField: 'username'
+  usernameField: 'email'
 },
-  function(req, username, password, done){
-    //Search for user in DB
-
-    //If exist check that password matches
-
-    //If matches
-    done(null, user)
-
-    //Else
-    done(null, false, {message: 'Username or password was incorrect'})
+  async function(req, email, password, done){
+    const pool = await poolPromise
+    pool.request()
+    .input('email', sql.NVarChar, email)
+    .query('SELECT [PERSON_KEY], [FIRST_NAME], [LAST_NAME], PASSWORD FROM TbPerson WHERE email = @email', (err, recordset)=>{
+      if(err){
+        console.log(err)
+        return done(err)
+      } else if(recordset.recordset[0].length < 1){
+        return done(null, false, {message: 'Email address is not valid'})
+      } else if(recordset.recordset[0].PASSWORD == password){
+        return done(null, recordset.recordset[0])
+      } else{
+        done(null, false, {message: 'Password was incorrect'})
+      }
+    })
   }
 ))
 
+
 passport.serializeUser(function(user, done){
-  done(null, user.id);
+  done(null, user.PERSON_KEY);
 })
 
-passport.deserializeUser(function(id, done){
-  //Run DB query to find user
+passport.deserializeUser(async function(id, done){
+  const pool = await poolPromise
+    pool.request()
+    .input('id', sql.Int, id)
+    .query('SELECT * FROM TbPerson WHERE PERSON_KEY = @id', (err, recordset)=>{
+    if(err){
+      console.log(err)
+    }
+    done(err, recordset.recordset[0])
+  })
+})
+
+app.get('/login', (req, res)=>{
+  res.render('login')
 })
 
 
@@ -67,16 +87,25 @@ passport.deserializeUser(function(id, done){
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+app.post('/login/attempt', passport.authenticate('local', {
+  successReturnToOrRedirect: '/',
+  failureRedirect: '/loginerror',
+  failureMessage: true
+}))
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
 
   // render the error page
   res.status(err.status || 500);
