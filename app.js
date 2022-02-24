@@ -6,11 +6,10 @@ var logger = require('morgan');
 require('dotenv').config()
 var passport = require('passport')
 var session = require('express-session')
-var localStrategy = require('passport-local').Strategy
-const { poolPromise, sql } = require('./db')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var loginRoutes = require('./routes/login')
 
 var app = express();
 
@@ -37,68 +36,17 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-passport.use('local', new localStrategy({
-  passReqToCallback: true,
-  usernameField: 'email'
-},
-  async function(req, email, password, done){
-    const pool = await poolPromise
-    pool.request()
-    .input('email', sql.NVarChar, email)
-    .query('SELECT [PERSON_KEY], [FIRST_NAME], [LAST_NAME], PASSWORD FROM TbPerson WHERE email = @email', (err, recordset)=>{
-      if(err){
-        console.log(err)
-        return done(err)
-      } else if(recordset.recordset[0].length < 1){
-        return done(null, false, {message: 'Email address is not valid'})
-      } else if(recordset.recordset[0].PASSWORD == password){
-        return done(null, recordset.recordset[0])
-      } else{
-        done(null, false, {message: 'Password was incorrect'})
-      }
-    })
-  }
-))
-
-
-passport.serializeUser(function(user, done){
-  done(null, user.PERSON_KEY);
-})
-
-passport.deserializeUser(async function(id, done){
-  const pool = await poolPromise
-    pool.request()
-    .input('id', sql.Int, id)
-    .query('SELECT * FROM TbPerson WHERE PERSON_KEY = @id', (err, recordset)=>{
-    if(err){
-      console.log(err)
-    }
-    done(err, recordset.recordset[0])
-  })
-})
-
-app.get('/login', (req, res)=>{
-  res.render('login')
-})
-
-
-
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/login', loginRoutes)
 
-app.post('/login/attempt', passport.authenticate('local', {
-  successReturnToOrRedirect: '/',
-  failureRedirect: '/loginerror',
-  failureMessage: true
-}))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-
+require('./auth')
 
 // error handler
 app.use(function(err, req, res, next) {
