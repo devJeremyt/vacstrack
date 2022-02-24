@@ -13,8 +13,6 @@ var loginRoutes = require('./routes/login')
 
 var app = express();
 
-//Loads local environment variables
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -35,6 +33,7 @@ app.use(session({
 
 app.use(passport.initialize())
 app.use(passport.session())
+app.use((req, res, next)=>{ res.locals.user = req.user; next()})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
