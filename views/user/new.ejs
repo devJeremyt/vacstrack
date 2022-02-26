@@ -3,13 +3,13 @@
     <div class="container">
         <form action="/users/new" method="post">
             <div class="row">
-                <div class="col">
+                <div class="col-4">
                     <div class="form-group">
                         <label for="firstName">First Name*</label>
                         <input name="firstName" type="text" class="form-control" id="firstName" placeholder="John" required>
                     </div>  
                 </div>
-                <div class="col">
+                <div class="col-4">
                     <div class="form-group">
                         <label for="lastName">Last Name*</label>
                         <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Doe" required>
@@ -17,7 +17,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="form-group col-4">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" class="form-control">
+                </div>
+                <div class="form-group col-4">
+                    <label for="password">Password</label>
+                    <input name="password" type="text" class="form-control">
+                </div>
+                <div class="form-group col-2">
+                    <label for="employeeType">Type of Employee*</label>
+                    <select name="emoloyeeType" class="form-control" id="employeeType" required>
+                        <option>Administator</option>
+                        <option>HR Representative</option>
+                        <option>Standard</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
                     <div class="form-group">
                         <label for="streetAddress">Street Address*</label>
                         <input name="streetAddress" type="text" class="form-control" id="streetAddress" placeholder="123 Sesame Street" required>
@@ -25,48 +43,38 @@
                 </div>
             </div>      
             <div class="row">
-                <div class="col">
+                <div class="col-4">
                     <div class="form-group">
                         <label for="city">City*</label>
                         <input name="city" type="text" class="form-control" id="city" placeholder="Atlanta" required>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
+                <div class="col-2">
                     <div class="form-group">
                         <label for="state">State*</label>
-                        <input name="state" type="text" class="form-control" id="state" placeholder="Georgia" required>
+                        <input name="state" type="text" class="form-control" id="state" placeholder="GA" required>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-2">
                     <div class="form-group">
                         <label for="zip">Zip*</label>
                         <input name="zip" type="text" class="form-control" id="zip" placeholder="30349" required>
                     </div>
-                </div>  
+                </div> 
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-3">
                     <div class="form-group">
                         <label for="homePhone">Home Phone</label>
                         <input name="homePhone" type="text" class="form-control" id="homePhone" placeholder="555-555-5555" required>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-3">
                     <div class="form-group">
                         <label for="mobilePhone">Mobile Phone*</label>
                         <input name="mobilePhone" type="text" class="form-control" id="mobilePhone" placeholder="555-555-5555" required> 
                     </div>
                 </div>  
-            </div>
-            <div class="form-group">
-                <label for="employeeType">Type of Employee*</label>
-                <select name="emoloyeeType" class="form-control" id="employeeType" required>
-                    <option>Administator</option>
-                    <option>HR Representative</option>
-                    <option>Standard</option>
-                </select>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

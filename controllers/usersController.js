@@ -28,17 +28,27 @@ exports.addUser = async function(req, res){
     let state = req.body.state
     let zip = req.body.zip
     let homePhone = req.body.homePhone
-    let mobilePhone = req.mobilePhone
-    let employeeType = req.employeeType
-    console.log(firstName)
-    console.log(lastName)
+    let mobilePhone = req.body.mobilePhone
+    let employeeType = req.body.employeeType
+    let password = req.body.password
+    let email = req.body.email
     try {
         pool.request()
-        .input('FN', sql.NVarChar, firstName)
-        .input('LN', sql.NVarChar, lastName)
+        .input('firstName', sql.NVarChar, firstName)
+        .input('lastName', sql.NVarChar, lastName)
+        .input('password', sql.NVarChar, password)
+        .input('email', sql.NVarChar, email)
+        .input('street', sql.NVarChar,streetAddress)
+        .input('city', sql.NVarChar, city)
+        .input('state', sql.NVarChar, state)
+        .input('zip', sql.NVarChar, zip)
+        .input('homePhone', sql.NChar, homePhone)
+        .input('mobilePhone', sql.NChar, mobilePhone)
+        .input('type', sql.NVarChar, employeeType)
         .execute('addUser', (err, result)=>{
             if(err){
                 console.log(err)
+                console.log(result)
             } else {
                 res.render('user/confirmation')
             }
