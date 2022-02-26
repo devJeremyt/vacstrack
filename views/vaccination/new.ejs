@@ -1,0 +1,17 @@
+<%-include("partials/header.ejs")%>
+<main>
+    <div class="container">
+        <form action="/vaccation/new" method="post">
+            <section class="form-group">
+                <label for="email">Username</label>
+                <input class="form-control col-md-3" id="email" name="email" type="email" required autofocus>
+            </section>
+            <section class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control col-md-3" id="password" name="password" type="password" required>
+            </section>
+            <button class="btn btn-primary" type="submit">Sign in</button>
+        </form>
+    </div>
+</main>
+<%-include("partials/footer.ejs")%>

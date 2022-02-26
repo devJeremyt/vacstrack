@@ -32,6 +32,8 @@ exports.addUser = async function(req, res){
     let employeeType = req.body.employeeType
     let password = req.body.password
     let email = req.body.email
+    let active = req.body.active || false
+    console.log(active)
     try {
         pool.request()
         .input('firstName', sql.NVarChar, firstName)
@@ -45,6 +47,7 @@ exports.addUser = async function(req, res){
         .input('homePhone', sql.NChar, homePhone)
         .input('mobilePhone', sql.NChar, mobilePhone)
         .input('type', sql.NVarChar, employeeType)
+        .input('active', sql.Bit, active)
         .execute('addUser', (err, result)=>{
             if(err){
                 console.log(err)

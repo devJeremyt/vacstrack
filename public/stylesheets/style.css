@@ -3,10 +3,11 @@
   --secondary-bg: #403F4C;
   --primary-text: #EDFFEC;
   --blue: #197B5F;
-  --ltgreen: #1B998B;
+  --ltgreen: #2f9c95;
 }
 body {
   background-color:var(--primary-bg);
+  color: white;
 
 }
 
@@ -41,4 +42,9 @@ form > * {
 
 .nav-link{
   color: white
+}
+
+input[type='checkbox']{
+  width: 1.25rem;
+  height: 1.25rem
 }
