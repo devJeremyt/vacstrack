@@ -33,7 +33,7 @@
             </ul>
             <div>
                 <% if(user != null){%>
-                    <p><%=user.FIRST_NAME%> <%=user.LAST_NAME%></p>
+                    <a href="#" class="nav-link dropdown-toggle"><%=user.FIRST_NAME%> <%=user.LAST_NAME%></a>
                 <%} else{ %>
                     <a href="/login" class="btn btn-primary">Login</a>
                 <%}%>

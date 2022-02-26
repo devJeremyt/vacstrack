@@ -33,3 +33,6 @@ form > * {
   justify-content: space-between;
 }
 
+.nav-link{
+  color: white
+}
