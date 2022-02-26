@@ -2,8 +2,8 @@
   --primary-bg : #9A8F97;
   --secondary-bg: #403F4C;
   --primary-text: #EDFFEC;
-  --blue: #4BA3C3;
-  --green: #1B998B;
+  --blue: #197B5F;
+  --ltgreen: #1B998B;
 }
 body {
   background-color:var(--primary-bg);
@@ -26,6 +26,12 @@ form > * {
 
 .btn-primary{
   background-color: var(--blue);
+  border-color: var(--blue);
+}
+
+.btn-primary:hover{
+  background-color: var(--ltgreen);
+  border-color: var(--blue);
 }
 
 #navbarNavDropdown{
