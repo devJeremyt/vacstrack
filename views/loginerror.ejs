@@ -1,0 +1,18 @@
+<%-include("partials/header.ejs")%>
+<main>
+    <div class="container">
+        <p style="color: rgba(122, 19, 19, 0.425)">Username or password was incorrect</p>
+        <form action="/login/attempt" method="post">
+            <section class="form-group">
+                <label for="email">Username</label>
+                <input class="form-control col-md-3" id="email" name="email" type="email" required autofocus>
+            </section>
+            <section class="form-group">
+                <label for="password">Password</label>
+                <input class="form-control col-md-3" id="password" name="password" type="password" required>
+            </section>
+            <button class="btn btn-primary" type="submit">Sign in</button>
+        </form>
+    </div>
+</main>
+<%-include("partials/footer.ejs")%>

@@ -4,7 +4,7 @@ var passport = require('passport')
 
 router.post('/attempt', passport.authenticate('local', {
     successReturnToOrRedirect: '/',
-    failureRedirect: '/loginerror',
+    failureRedirect: '/login/loginerror',
     failureMessage: true
   })
 )
@@ -13,5 +13,9 @@ router.get('/', (req, res)=>{
     res.render('login')
     }
 )
+
+router.get('/loginerror', (req, res)=>{
+  res.render('loginerror')
+})
 
 module.exports = router
