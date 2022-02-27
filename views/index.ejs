@@ -2,7 +2,7 @@
 <main>
     <div class="container">
         <div class="jumbotron">
-            <h1 class="display-4">Welcome <%=user%></h1>
+            <h1 class="display-4">Welcome <%if(this.user){%><%user.firstName%><%}%></h1>
             <p class="lead">VacsTrack is the world leading source for employee vaccination tracking.</p>
         </div>
         <div class="row">

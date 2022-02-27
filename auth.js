@@ -18,9 +18,12 @@ passport.use('local', new localStrategy({
         } else if(recordset.recordset[0] === undefined){
           console.log(recordset)
           return done(null, false, {message: 'Email address is not valid'})
-        } else if(recordset.recordset[0].PASSWORD == password){
+        } else if(recordset.recordset[0].password == password){
+          console.log('passwords matched')
           return done(null, recordset.recordset[0])
         } else{
+          console.log('hit else')
+          console.log(recordset)
           done(null, false, {message: 'Password was incorrect'})
         }
       })
@@ -29,7 +32,7 @@ passport.use('local', new localStrategy({
   
   
   passport.serializeUser(function(user, done){
-    done(null, user.PERSON_KEY);
+    done(null, user.persKey);
   })
   
   passport.deserializeUser(async function(id, done){
