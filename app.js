@@ -10,6 +10,7 @@ var session = require('express-session')
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var loginRoutes = require('./routes/login')
+var vaccinationRoutes = require('./routes/vaccinations')
 
 var app = express();
 
@@ -38,6 +39,7 @@ app.use((req, res, next)=>{ res.locals.user = req.user; next()})
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRoutes)
+app.use('/vaccination', vaccinationRoutes)
 
 
 // catch 404 and forward to error handler

@@ -1,17 +1,21 @@
-<%-include("partials/header.ejs")%>
+<%-include("../partials/header.ejs")%>
 <main>
     <div class="container">
-        <form action="/vaccation/new" method="post">
+        <form action="/vaccination/new" method="post">
             <section class="form-group">
-                <label for="email">Username</label>
-                <input class="form-control col-md-3" id="email" name="email" type="email" required autofocus>
+                <label for="vacsType">Vaccine Type</label>
+                <input class="form-control col-md-3" id="vacsType" name="vacsType" type="text" required autofocus>
             </section>
             <section class="form-group">
-                <label for="password">Password</label>
-                <input class="form-control col-md-3" id="password" name="password" type="password" required>
+                <label for="name">Vaccine Name</label>
+                <input class="form-control col-md-3" id="name" name="name" type="text" required>
             </section>
-            <button class="btn btn-primary" type="submit">Sign in</button>
+            <section class="form-group">
+                <label for="manufacturer">Manufacturer</label>
+                <input class="form-control col-md-3" id="manufacturer" name="manufacturer" type="text" required>
+            </section>
+            <button class="btn btn-primary" type="submit">Add</button>
         </form>
     </div>
 </main>
-<%-include("partials/footer.ejs")%>
+<%-include("../partials/footer.ejs")%>
