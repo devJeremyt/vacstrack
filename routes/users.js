@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 const usersController = require('../controllers/usersController')
+const authorize = require('../authorize')
+
 
 /* GET users listing. */
-router.get('/', async function(req, res, next) {
+router.get('/', authorize('Administrator'), async function(req, res, next) {
   let users = await usersController.getUsers()
   res.render('user/index', {users : users});
 });
