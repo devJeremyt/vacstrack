@@ -20,7 +20,7 @@ exports.addVaccine = async function(req, res){
     })
 }
 
-exports.addVacsRecord = async function(req, res)=>{
+exports.addVacsRecord = async function(req, res){
     let pool = poolPromise
 
     let date = req.body.date
