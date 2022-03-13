@@ -15,7 +15,7 @@ const searchFunction = (function(){
         arr.forEach(obj=>{
             let li = document.createElement('li')
             let a = document.createElement('a')
-            a.href = '/users/user?' + new URLSearchParams({firstName: obj.firstName, lastName: obj.lastName})
+            a.href = '/users/user?' + new URLSearchParams({id: obj.persKey})
             a.innerHTML = obj.firstName + ' ' + obj.lastName
             li.appendChild(a)
             autocomBox.appendChild(li)
