@@ -25,6 +25,10 @@ router.get('/user', authorize(['Administrator', 'HR Representative']), async (re
   res.render('user/edit', {employee : employee})
 })
 
+router.post('/edit', authorize(['Administrator', 'HR Representative']), async (req, res)=>{
+  usersController.updateUser(req, res)
+})
+
 router.get('/search', (req, res)=>{ usersController.findUserByName(req, res)})
 
 module.exports = router;

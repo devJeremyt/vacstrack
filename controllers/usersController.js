@@ -114,12 +114,12 @@ exports.updateUser = async function(req, res){
         .input('type', sql.NVarChar, employeeType)
         .input('active', sql.Bit, active)
         .input('id', sql.Int, id)
-        .execute('updateUser', (err, result)=>{
+        .execute('dbo.updateUser', (err, result)=>{
             if(err){
                 console.log(err)
                 console.log(result)
             } else {
-                res.json(result.recordset[0])
+                res.redirect('back')
             }
         })
     } catch (error) {
