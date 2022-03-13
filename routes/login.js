@@ -18,4 +18,9 @@ router.get('/loginerror', (req, res)=>{
   res.render('loginerror')
 })
 
+router.get('/logout', (req, res)=>{
+  req.logout()
+  res.redirect('/')
+})
+
 module.exports = router
