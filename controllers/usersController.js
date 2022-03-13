@@ -1,3 +1,4 @@
+const { pool } = require('mssql');
 const { sql, poolPromise } = require('../db');
 
 //Gets the results of all the users in the persons table
@@ -60,4 +61,21 @@ exports.addUser = async function(req, res){
         console.log(error)
     }
 
+}
+
+exports.findUserByName = async function(req, res){
+    let pool = await poolPromise
+
+    let employee = req.query.employeeSearch
+
+    if(employee !== ''){
+        pool.request()
+        .input('search', sql.NVarChar, employee)
+        .execute('dbo.FindUserByName', (err, result)=>{
+            console.log(result)
+            res.status(200).json(result.recordset)
+        })
+    } else {
+        res.status(200).json('')
+    }
 }

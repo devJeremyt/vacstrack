@@ -56,4 +56,30 @@ input[type='text']{
   vertical-align: middle;
 }
 
+.autocom-box li {
+  list-style: none;
+  padding: 5px;
+}
+
+.search-input {
+  position: relative;
+}
+
+.autocom-box{
+  position: absolute;
+  background-color: #a4a6a8;
+  width: 248px;
+  border-radius: 3px;
+}
+
+.autocom-box li a {
+  color: white;
+  text-decoration: none;
+}
+
+.autocom-box li:hover{
+  background-color: #87888a;
+
+}
+
 

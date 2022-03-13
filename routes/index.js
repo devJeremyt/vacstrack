@@ -4,7 +4,6 @@ const authorize = require('../authorize')
 
 /* GET home page. */
 router.get('/',function(req, res, next) {
-  console.log(req.user)
   res.render('index', { title: 'VacsTrack' });
 });
 

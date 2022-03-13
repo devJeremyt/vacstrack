@@ -19,4 +19,6 @@ router.post('/new', (req, res)=>{
   usersController.addUser(req, res);
 })
 
+router.get('/search', (req, res)=>{ usersController.findUserByName(req, res)})
+
 module.exports = router;

@@ -32,12 +32,17 @@
                     </li>
                 </ul>
             </div>
-            <div>
-                <form action="/users/search">
-                    <input name="employeeSearch" type="text"id="employeeSearch" placeholder="Search">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
-            </div>
+            <% if(user != null){%>
+                <% if(user.type == 'Administrator' || user.type == 'HR Representative'){%>
+                    <div class=".search-input">
+                        <input name="employeeSearch" type="text"id="employeeSearch" placeholder="Search">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                        <div class="autocom-box">
+
+                        </div>
+                    </div>
+                <%}%>
+            <%}%>
             <div>
                 <% if(user != null){%>
                     <a href="#" class="nav-link dropdown-toggle"><%=user.firstName%> <%=user.lastName%></a>
