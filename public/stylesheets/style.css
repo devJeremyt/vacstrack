@@ -86,4 +86,16 @@ input[type='text']{
 
 }
 
+#employeeInput{
+  position: absolute;
+  background-color: #a4a6a8;
+  width: 248px;
+  border-radius: 3px;
+}
+
+#employeeInput li {
+  list-style: none;
+  padding: 5px;
+}
+
 
