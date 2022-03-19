@@ -21,7 +21,6 @@ router.post('/new',authorize(['Administrator', 'HR Representative']), (req, res)
 
 router.get('/user', authorize(['Administrator', 'HR Representative']), async (req, res)=>{
   let employee = await usersController.getUser(req, res)
-  console.log(employee)
   res.render('user/edit', {employee : employee})
 })
 

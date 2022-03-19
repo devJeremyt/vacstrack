@@ -133,6 +133,8 @@ exports.findUserByName = async function(req, res){
 
     let employee = req.query.employeeSearch
 
+    console.log(employee)
+
     if(employee !== ''){
         pool.request()
         .input('search', sql.NVarChar, employee)

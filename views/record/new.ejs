@@ -1,35 +1,39 @@
 <%-include("../partials/header.ejs")%>
 <main>
-    <div class="container">
-        <form action="/vaccination/new" method="post">
+    <div class="container center">
+        <form id="newRecordForm" action="/records/new" method="post">
             <input type="text" id="employeeID" name="employeeID" hidden>
             <input type="text" id="vacsID" name="vacsID" hidden>
             <section class="form-group">
-                <label for="vacsType">Employee</label>
-                <input class="form-control col-md-3" id="employee" name="employee" type="text" required autofocus>
-                <div id="employeeInput">
+                <label for="employee">Employee</label>
+                <input class="form-control col-md-3" id="employee" name="employee" type="" list="employeeInput" required autofocus autocomplete="off">
+                <datalist id="employeeInput">
 
-                </div>
+                </datalist>
             </section>
             <section class="form-group">
-                <label for="vacsType">Vaccine</label>
-                <input class="form-control col-md-3" id="vaccine" name="vaccine" type="text" required>
+                <label for="vaccine">Vaccine</label>
+                <input class="form-control col-md-3" id="vaccine" name="vaccine" type="text" list="vacsInput" required autocomplete="off">
+                <datalist id="vacsInput">
+
+                </datalist>
             </section>
             <section class="form-group">
-                <label for="vacsType">Date Taken</label>
-                <input class="form-control col-md-3" id="dateTaken" name="dateTaken" type="text" required>
+                <label for="dateTaken">Date Taken</label>
+                <input class="form-control col-md-3" id="dateTaken" name="dateTaken" type="text" required autocomplete="off">
             </section>
             <section class="form-group">
-                <label for="name">Dose Number</label>
-                <input class="form-control col-md-3" id="doseNumber" name="doseNumber" type="text" required>
+                <label for="doseeNumber">Dose Number</label>
+                <input class="form-control col-md-3" id="doseNumber" name="doseNumber" type="text" required autocomplete="off">
             </section>
             <section class="form-group">
-                <label for="manufacturer">Location</label>
-                <input class="form-control col-md-3" id="location" name="location" type="text" required>
+                <label for="location">Location</label>
+                <input class="form-control col-md-3" id="location" name="location" type="text" required autocomplete="off">
             </section>
             <button class="btn btn-primary" type="submit">Add</button>
         </form>
     </div>
 </main>
 <script src="/js/setUserOnVacsRecord.js"></script>
+<script src="/js/validateRecordsSubmit.js"></script>
 <%-include("../partials/footer.ejs")%>

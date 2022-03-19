@@ -10,4 +10,7 @@ router.post('/new', (req, res)=>{
     controller.addVaccine(req,res)
 })
 
+router.get('/search', (req, res)=>{
+  controller.searchVaccine(req, res)
+})
 module.exports = router;

@@ -21,21 +21,44 @@ exports.addVaccine = async function(req, res){
 }
 
 exports.addVacsRecord = async function(req, res){
-    let pool = poolPromise
+    let pool = await poolPromise
 
-    let date = req.body.date
+    let date = req.body.dateTaken
     let vacsID = req.body.vacsID
-    let persKey = req.boyd.persKey
+    let persKey = req.body.employeeID
+    let doseNumber = req.body.doseNumber
+    let location = req.body.location
 
     pool.request()
     .input('date', sql.Date, date)
     .input('vacsID', sql.Int, vacsID)
     .input('persKey', sql.Int, persKey)
+    .input('doseNumber', sql.Int, doseNumber)
+    .input('location', sql.NVarChar, location)
     .execute('addVacsRecord', (err, result)=>{
         if(err){
             console.log(err)
         }
-
-        res.render('vaccination/record/new')
+        console.log(result)
+        res.render('record/new')
     })
+}
+
+exports.searchVaccine = async function(req, res){
+    let pool = await poolPromise
+
+    let vaccine = req.query.vacsType
+    console.log(vaccine)
+    if(vaccine !== ''){
+        pool.request()
+        .input('search', sql.NVarChar, vaccine)
+        .execute('searchVaccine', (err, result)=>{
+            if(err){
+                res.status('500').json('')
+            }
+            res.status(200).json(result.recordset)
+        })
+    } else {
+        res.status(200).json('Vaccine was empty string')
+    }
 }
