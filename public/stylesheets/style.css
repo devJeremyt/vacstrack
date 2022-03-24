@@ -98,4 +98,16 @@ input[type='text']{
   padding: 5px;
 }
 
+a.card{
+  height: 100%;
+}
+
+card-body{
+  position: relative;
+}
+
+p.card-text{
+  position: absolute;
+  bottom: 1rem;
+}
 

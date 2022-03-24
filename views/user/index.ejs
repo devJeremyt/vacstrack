@@ -3,6 +3,7 @@
     <table class="table">
         <thead>
             <tr>
+                <th scope="col">Edit</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
             </tr>
@@ -10,6 +11,7 @@
         <tbody>
             <%for(let i = 0; i < users.recordset.length; i++){ %>
                 <tr>
+                    <td><a href="/users/user?id=<%=users.recordset[i].persKey%>">Edit</a></td>
                     <td><%=users.recordset[i].firstName%></td>
                     <td><%=users.recordset[i].lastName%></td>
                 </tr>

@@ -119,7 +119,8 @@ exports.updateUser = async function(req, res){
                 console.log(err)
                 console.log(result)
             } else {
-                res.redirect('back')
+                let users = exports.getUsers()
+                res.render('user/index',{users : users})
             }
         })
     } catch (error) {

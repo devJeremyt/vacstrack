@@ -7,6 +7,8 @@
         </div>
         <%if(user && user.type == 'Standard'){%>
             <%-include('partials/standarduserDashboard.ejs')%>
+        <%} else if(user && (user.type == 'Administrator' || user.type == 'HR Representative')){%>
+            <%-include('partials/HRAdminUserDashboard.ejs')%>
         <%}%>
         
     </div>
