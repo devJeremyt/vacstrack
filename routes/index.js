@@ -7,4 +7,6 @@ router.get('/',function(req, res, next) {
   res.render('index', { title: 'VacsTrack' });
 });
 
+router.get('/problem', (req, res)=> res.render('error', {error : "Page coming soon"}))
+
 module.exports = router;
