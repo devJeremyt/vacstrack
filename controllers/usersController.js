@@ -98,7 +98,7 @@ exports.updateUser = async function(req, res){
     let email = req.body.email
     let active = req.body.active || false
     let id = req.body.id
-    console.log(active)
+    let users = await exports.getUsers()
     try {
         pool.request()
         .input('firstName', sql.NVarChar, firstName)
@@ -119,7 +119,7 @@ exports.updateUser = async function(req, res){
                 console.log(err)
                 console.log(result)
             } else {
-                let users = exports.getUsers()
+                
                 res.render('user/index',{users : users})
             }
         })
