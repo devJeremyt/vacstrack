@@ -2,7 +2,7 @@
 <main>
     <div class="container">
         <form action="/users/edit" method="post">
-            <input type="text" name="id" id="id" value="<%=employee.persKey%>">
+            <input type="text" name="id" id="id" value="<%=employee.persKey%>" hidden>
             <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group">
@@ -36,11 +36,11 @@
                     <label for="employeeType">Type of Employee*</label>
                     <select name="employeeType" class="form-control" id="employeeType" required
                     <%=user.type != 'Administrator' ? "disabled" : ''%>
-                    <%=employee.type == 'Administator' ? 'options.selectedIndex = 0' : 'options.selectedIndex = 2'%>
+                    <%=employee.type == 'Administrator' ? 'options.selectedIndex = 0' : 'options.selectedIndex = 2'%>
                     >
+                        <option>Standard</option>
                         <option>Administrator</option>
                         <option>HR Representative</option>
-                        <option>Standard</option>
                     </select>
                 </div>
             </div>
