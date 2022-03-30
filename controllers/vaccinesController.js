@@ -39,7 +39,6 @@ exports.addVacsRecord = async function(req, res){
         if(err){
             console.log(err)
         }
-        console.log(result)
         res.render('record/new')
     })
 }
@@ -61,4 +60,40 @@ exports.searchVaccine = async function(req, res){
     } else {
         res.status(200).json('Vaccine was empty string')
     }
+}
+
+exports.getRecordsPendingApproval = async function(req, res){
+    let pool = await poolPromise
+
+    try {
+        pool.request()
+        .execute('getRecordsPendingApproval', (err, result)=>{
+            if(err){
+                console.log(result)
+                res.status('500').json([])
+            }
+            console.log('Success but' + result)
+            res.status(200).json(result.recordset)
+        })
+    } catch (error) {
+        
+    }
+}
+
+exports.viewPendingApprovalRecords = async function(req, res){
+    let pool = await poolPromise
+
+    try {
+        pool.request()
+        .execute('getRecordsPendingApproval', (err, result)=>{
+            if(err){
+                res.render('error', {error: err})
+            } else{
+                console.log(result.recordset)
+                res.render('record/pendingApproval', {records: result.recordset})
+            }
+        })
+        } catch (error) {
+            res.render('error', {error: error})
+        }
 }

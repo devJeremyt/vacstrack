@@ -11,10 +11,12 @@ router.post('/new', (req, res)=>{
     vaccinesController.addVacsRecord(req, res)
 })
 
-router.get('/view', (req, res)=> res.render('error', {error: "Page coming soon"}))
+router.get('/pendingApproval', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.viewPendingApprovalRecords(req, res))
 
 router.get('/support/new', (req, res)=> res.render('error', {error: "Page coming soon"}))
 
 router.get('/test/new', (req, res)=> res.render('error', {error: "Page coming soon"}))
+
+router.get('/needapproval', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.getRecordsPendingApproval(req, res))
 
 module.exports = router

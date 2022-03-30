@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-sm-3">
-        <a class="card" href="/records/view">
+        <a class="card" href="/records/pendingApproval">
             <img class="card-img-top" src="/images/approved.jpg" alt="image of checkmark">
             <div class="card-body">
-              <p class="card-text">Approve Vaccination records: 5 pending approvals</p>
+              <p class="card-text">Approve Vaccination records: <span id="countPendingApproval">0</span> pending approvals</p>
             </div>
         </a>
     </div>
@@ -32,3 +32,5 @@
         </a>
     </div>
 </div>
+
+<script src="/js/getCountRecordsPendingApproval.js"></script>
