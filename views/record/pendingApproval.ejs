@@ -10,15 +10,17 @@
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">Vaccine</th>
+                <th scope="col">Dose Number</th>
             </tr>
         </thead>
         <tbody>
             <%for(let i = 0; i < records.length; i++){ %>
                 <tr>
-                    <td><a href="#">Approve</a> / <a href="#">View</a></td>
+                    <td><a href="/records/markApproved?recordId=<%=records[i].recordID%>">Approve</a> / <a href="#">View</a></td>
                     <td><%=records[i].firstName%></td>
                     <td><%=records[i].lastName%></td>
                     <td><%=records[i].vacsName%></td>
+                    <td><%=records[i].doseNumber%></td>
                 </tr>
             <%}%>
         </tbody>

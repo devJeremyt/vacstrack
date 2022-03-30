@@ -19,4 +19,6 @@ router.get('/test/new', (req, res)=> res.render('error', {error: "Page coming so
 
 router.get('/needapproval', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.getRecordsPendingApproval(req, res))
 
+router.get('/markApproved', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.markRecordApproved(req, res))
+
 module.exports = router

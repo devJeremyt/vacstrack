@@ -1,4 +1,3 @@
-const { pool } = require('mssql');
 const { sql, poolPromise } = require('../db');
 
 exports.addVaccine = async function(req, res){
@@ -72,7 +71,6 @@ exports.getRecordsPendingApproval = async function(req, res){
                 console.log(result)
                 res.status('500').json([])
             }
-            console.log('Success but' + result)
             res.status(200).json(result.recordset)
         })
     } catch (error) {
@@ -89,11 +87,27 @@ exports.viewPendingApprovalRecords = async function(req, res){
             if(err){
                 res.render('error', {error: err})
             } else{
-                console.log(result.recordset)
                 res.render('record/pendingApproval', {records: result.recordset})
             }
         })
         } catch (error) {
             res.render('error', {error: error})
         }
+}
+
+exports.markRecordApproved = async function(req, res){
+    let pool = await poolPromise
+    try {
+        pool.request()
+        .input('recordID', sql.Int, req.query.recordId)
+        .execute('markRecordAsApproved', (err, result)=>{
+            if(err){
+                res.render('error', {error: err})
+            } else {
+                res.redirect('/records/pendingApproval')
+            }
+        })
+    } catch (error) {
+        
+    }
 }
