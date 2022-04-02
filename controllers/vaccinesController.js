@@ -111,3 +111,27 @@ exports.markRecordApproved = async function(req, res){
         
     }
 }
+
+exports.createTestResult = async function(req, res){
+    let pool = await poolPromise
+    console.log(req.body)
+    console.log(req.user.persKey)
+    try {
+
+        pool.request()
+        .input('result', sql.Bit, parseInt(req.body.result))
+        .input('atHome', sql.Bit, parseInt(req.body.atHome))
+        .input('rapid', sql.Bit, parseInt(req.body.rapid))
+        .input('persKey', sql.Int, req.user.persKey)
+        .input('date', sql.NVarChar, req.body.date)
+        .execute('createTestResult', (err, result)=>{
+            if(err){
+                res.render('error', {error: err})
+            } else {
+                res.render('index')
+            }
+        })
+    } catch (error) {
+        res.render('error', {error: error})
+    }
+}
