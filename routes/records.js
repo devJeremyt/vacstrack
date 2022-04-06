@@ -3,6 +3,10 @@ var router = express.Router();
 const vaccinesController = require('../controllers/vaccinesController')
 const authorize = require('../authorize')
 
+router.get('/', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.viewRecords(req, res))
+
+router.get('/view', (req,res)=>{vaccinesController.viewIndividualRecord(req, res)})
+
 router.get('/new', (req, res)=>{
     res.render('record/new')
 })

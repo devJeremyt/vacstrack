@@ -114,10 +114,7 @@ exports.markRecordApproved = async function(req, res){
 
 exports.createTestResult = async function(req, res){
     let pool = await poolPromise
-    console.log(req.body)
-    console.log(req.user.persKey)
     try {
-
         pool.request()
         .input('result', sql.Bit, parseInt(req.body.result))
         .input('atHome', sql.Bit, parseInt(req.body.atHome))
@@ -134,4 +131,42 @@ exports.createTestResult = async function(req, res){
     } catch (error) {
         res.render('error', {error: error})
     }
+}
+
+exports.viewRecords = async function(req, res){
+    let pool = await poolPromise
+
+    pool.request()
+    .query(
+        'SELECT * FROM tbVacsRecords AS VR ' + 
+        'INNER JOIN TbPerson AS PS ON PS.persKey = VR.persKey ' +
+        'INNER JOIN TbVaccines AS VA ON VA.vacsId = VR.vacsId', (err, result)=>{
+            if(err){
+                console.log(err)
+                res.render('error', {error: err})
+            }
+
+        res.render('record/index', {records : result.recordset})
+    })
+}
+
+exports.viewIndividualRecord = async function(req, res){
+    let pool = await poolPromise
+
+    console.log(req.user)
+
+    pool.request()
+    .input('persKey', sql.Int, req.user.persKey)
+    .query(
+        'SELECT * FROM tbVacsRecords AS VR ' + 
+        'INNER JOIN TbPerson AS PS ON PS.persKey = VR.persKey ' +
+        'INNER JOIN TbVaccines AS VA ON VA.vacsId = VR.vacsId ' +
+        'WHERE VR.persKey = @persKey', (err, result)=>{
+            if(err){
+                console.log(err)
+                res.render('error', {error: err})
+            }
+
+        res.render('record/index', {records : result.recordset})
+    })
 }

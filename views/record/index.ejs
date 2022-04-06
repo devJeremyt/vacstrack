@@ -1,0 +1,35 @@
+<%-include("../partials/header.ejs")%>
+
+<main>
+<div class="container">
+    <h1 class="center">Vaccination Records</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Edit</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Vaccine</th>
+                <th scope="col">Dose Number</th>
+                <th scope="col">Location</th>
+                <th scope="col">Approved</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%for(let i = 0; i < records.length; i++){ %>
+                <tr>
+                    <td><a>Edit</a></td>
+                    <td><%=records[i].firstName%></td>
+                    <td><%=records[i].lastName%></td>
+                    <td><%=records[i].name%></td>
+                    <td><%=records[i].doseNumber%></td>
+                    <td><%=records[i].location%></td>
+                    <td><%=records[i].approvalStatus%></td>
+                </tr>
+            <%}%>
+        </tbody>
+    </table>
+</div>
+</main>
+
+<%-include("../partials/footer.ejs")%>
