@@ -5,7 +5,7 @@ const authorize = require('../authorize')
 
 router.get('/', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.viewRecords(req, res))
 
-router.get('/view', (req,res)=>{vaccinesController.viewIndividualRecord(req, res)})
+router.get('/view', authorize(['HR Representative', 'Administrator', 'Standard']), (req,res)=>{vaccinesController.viewIndividualRecord(req, res)})
 
 router.get('/new', (req, res)=>{
     res.render('record/new')
@@ -15,6 +15,9 @@ router.post('/new', (req, res)=>{
     vaccinesController.addVacsRecord(req, res)
 })
 
+router.get('/edit', (req, res)=>vaccinesController.editRecord(req, res))
+
+router.post('/edit', (req,res)=>vaccinesController.submitRecordEdit(req, res))
 
 router.get('/pendingApproval', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.viewPendingApprovalRecords(req, res))
 

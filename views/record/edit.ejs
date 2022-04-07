@@ -1,0 +1,60 @@
+<%-include("../partials/header.ejs")%>
+<main>
+    <div class="container center">
+        <form id="editRecordForm" action="/records/edit" method="post">
+            <input type="text" id="recordID" name="recordID" hidden value="<%=record.recordID%>">
+            <input type="text" id="vacsID" name="vacsID" hidden value="<%=record.vacsID%>">
+            <section class="form-group">
+                <label for="vaccine">Vaccine</label>
+                <input class="form-control col-md-3" id="vaccine" name="vaccine" type="text" list="vacsInput" required autocomplete="off" value="<%=record.name%>">
+                <datalist id="vacsInput">
+
+                </datalist>
+            </section>
+            <section class="form-group">
+                <label for="dateTaken">Date Taken</label>
+                <input class="form-control col-md-3" id="dateTaken" name="dateTaken" type="text" required autocomplete="off" value="<%=new Date(record.date).toLocaleDateString()%>">
+            </section>
+            <section class="form-group">
+                <label for="doseNumber">Dose Number</label>
+                <input class="form-control col-md-3" id="doseNumber" name="doseNumber" type="text" required autocomplete="off" value="<%=record.doseNumber%>">
+            </section>
+            <section class="form-group">
+                <label for="location">Location</label>
+                <input class="form-control col-md-3" id="location" name="location" type="text" required autocomplete="off" value="<%=record.location%>">
+            </section>
+            <button class="btn btn-primary" type="submit">Update</button>
+        </form>
+    </div>
+</main>
+<script>
+        let vacsType = document.querySelector('#vaccine')
+    let autoComVacs = document.querySelector('#vacsInput')
+    vacsType.addEventListener('input', (event)=>{
+        fetch('/vaccinations/search?' + new URLSearchParams({vacsType : event.target.value}))
+        .then(response => response.json())
+        .then(data => updateAutoComVacs(data))
+    })
+
+    vacsType.onblur = (event)=>{
+        autoComVacs.innerHTML = ""
+        fetch('/vaccinations/search?' + new URLSearchParams({vacsType : event.target.value}))
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data)
+            vacsID.value = data[0].vacsId;
+        })
+    }
+
+    function updateAutoComVacs(arr){
+        console.log(arr)
+        autoComVacs.innerHTML = ''
+        arr.forEach(obj=>{
+            let option = document.createElement('option')
+            option.innerHTML = obj.name
+            option.value = option.innerHTML
+            autoComVacs.appendChild(option)
+        })
+    }
+</script>
+<%-include("../partials/footer.ejs")%>

@@ -153,8 +153,6 @@ exports.viewRecords = async function(req, res){
 exports.viewIndividualRecord = async function(req, res){
     let pool = await poolPromise
 
-    console.log(req.user)
-
     pool.request()
     .input('persKey', sql.Int, req.user.persKey)
     .query(
@@ -169,4 +167,55 @@ exports.viewIndividualRecord = async function(req, res){
 
         res.render('record/index', {records : result.recordset})
     })
+}
+
+exports.editRecord = async function(req, res){
+    let pool = await poolPromise
+    try {
+        if(req.query.id == undefined || req.query.id == ''){
+            res.render('error', {error: 'No ID was provided.'})
+        }
+
+        pool.request()
+        .input('id', sql.Int, req.query.id)
+        .query('SELECT * FROM tbVacsRecords AS VR ' + 
+        'INNER JOIN tbVaccines AS TV ON VR.vacsID = TV.vacsID ' + 
+        'WHERE recordID = @id', (err, result)=>{
+            if(err){
+                res.render('error', {error: err})
+            } else{
+                res.render('record/edit', {record: result.recordset[0]})
+            }
+        })
+    } catch (error) {
+        res.render('error', {error: error})
+    }
+}
+
+exports.submitRecordEdit = async function(req, res){
+    let pool = await poolPromise
+    try {
+
+        pool.request()
+        .input('id', sql.Int, req.body.recordID)
+        .input('vacsId', sql.Int, req.body.vacsID)
+        .input('date', sql.Date, req.body.dateTaken)
+        .input('doseNumber', sql.Int, req.body.doseNumber)
+        .input('location', sql.NVarChar, req.body.location)
+        .query('UPDATE tbVacsRecords ' + 
+                'SET vacsId = @vacsId, ' +
+                'date = @date, ' +
+                'doseNumber = @doseNumber, ' + 
+                'location = @location, ' +
+                'approvalStatus = 0 ' +
+                'WHERE recordID = @id', (err, result)=>{
+            if(err){
+                res.render('error', {error: err})
+            } else{
+                res.redirect('/records/view')
+            }
+        })
+    } catch (error) {
+        res.render('error', {error: error})
+    }
 }

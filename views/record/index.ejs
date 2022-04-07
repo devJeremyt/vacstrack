@@ -18,7 +18,7 @@
         <tbody>
             <%for(let i = 0; i < records.length; i++){ %>
                 <tr>
-                    <td><a>Edit</a></td>
+                    <td><a href="/records/edit?id=<%=records[i].recordID%>">Edit</a></td>
                     <td><%=records[i].firstName%></td>
                     <td><%=records[i].lastName%></td>
                     <td><%=records[i].name%></td>
