@@ -7,31 +7,34 @@ const searchUser = (function(){
     let vacsID = document.querySelector('#vacsID')
 
 
-    //Searches as you type an employee's name
-    employeeSearch.addEventListener('input', (event)=>{
-        fetch('/users/search?' + new URLSearchParams({employeeSearch : event.target.value}))
-        .then(response => response.json())
-        .then(data => updateAutoComEmployee(data))
-    })
-
-    //Sets the employeeID field whenever focus leaves the employee field
-    employeeSearch.onblur = (event)=>{
-        autoComEmployee.innerHTML = ""
-        fetch('/users/search?' + new URLSearchParams({employeeSearch : event.target.value}))
-        .then(response => response.json())
-        .then(data =>{
-            employeeID.value = data[0].persKey;
+    
+    if(employeeSearch != null){
+        //Searches as you type an employee's name
+        employeeSearch.addEventListener('input', (event)=>{
+            fetch('/users/search?' + new URLSearchParams({employeeSearch : event.target.value}))
+            .then(response => response.json())
+            .then(data => updateAutoComEmployee(data))
         })
-    }
 
-    function updateAutoComEmployee(arr){
-        autoComEmployee.innerHTML = ''
-        arr.forEach(obj=>{
-            let option = document.createElement('option')
-            option.innerHTML = obj.firstName + ' ' + obj.lastName
-            option.value = option.innerHTML
-            autoComEmployee.appendChild(option)
-        })
+        //Sets the employeeID field whenever focus leaves the employee field
+        employeeSearch.onblur = (event)=>{
+            autoComEmployee.innerHTML = ""
+            fetch('/users/search?' + new URLSearchParams({employeeSearch : event.target.value}))
+            .then(response => response.json())
+            .then(data =>{
+                employeeID.value = data[0].persKey;
+            })
+        }
+
+        function updateAutoComEmployee(arr){
+            autoComEmployee.innerHTML = ''
+            arr.forEach(obj=>{
+                let option = document.createElement('option')
+                option.innerHTML = obj.firstName + ' ' + obj.lastName
+                option.value = option.innerHTML
+                autoComEmployee.appendChild(option)
+            })
+        }
     }
 
     vacsType.addEventListener('input', (event)=>{

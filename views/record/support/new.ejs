@@ -1,0 +1,25 @@
+<%-include("../../partials/header.ejs")%>
+<main>
+    <div class="container center">
+        <h1>Choose a file to upload for your vaccination records</h1>
+        <form id="newRecordForm" action="/records/support/new" method="post">
+            <input type="text" id="employeeID" name="employeeID" hidden value="<%if(user && user.type == 'Standard'){%><%=user.persKey%><%}%>">
+            <%if(user && user.type != 'Standard'){%>
+                <section class="form-group">
+                    <label for="employee">Employee</label>
+                    <input class="form-control col-md-3" id="employee" name="employee" type="" list="employeeInput" required autofocus autocomplete="off">
+                    <datalist id="employeeInput">
+
+                    </datalist>
+                </section>
+            <%}%>
+            <section class="form-group">
+                <label for="file">File</label>
+                <input class="form-control col-md-7" id="file" name="file" type="file" required autocomplete="off">
+
+            </section>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+</main>
+<%-include("../../partials/footer.ejs")%>

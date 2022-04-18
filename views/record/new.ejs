@@ -2,15 +2,17 @@
 <main>
     <div class="container center">
         <form id="newRecordForm" action="/records/new" method="post">
-            <input type="text" id="employeeID" name="employeeID" hidden>
+            <input type="text" id="employeeID" name="employeeID" hidden value="<%if(user && user.type == 'Standard'){%><%=user.persKey%><%}%>">
             <input type="text" id="vacsID" name="vacsID" hidden>
-            <section class="form-group">
-                <label for="employee">Employee</label>
-                <input class="form-control col-md-3" id="employee" name="employee" type="" list="employeeInput" required autofocus autocomplete="off">
-                <datalist id="employeeInput">
+            <%if(user && user.type != 'Standard'){%>
+                <section class="form-group">
+                    <label for="employee">Employee</label>
+                    <input class="form-control col-md-3" id="employee" name="employee" type="" list="employeeInput" required autofocus autocomplete="off">
+                    <datalist id="employeeInput">
 
-                </datalist>
-            </section>
+                    </datalist>
+                </section>
+            <%}%>
             <section class="form-group">
                 <label for="vaccine">Vaccine</label>
                 <input class="form-control col-md-3" id="vaccine" name="vaccine" type="text" list="vacsInput" required autocomplete="off">

@@ -21,7 +21,9 @@ router.post('/edit', (req,res)=>vaccinesController.submitRecordEdit(req, res))
 
 router.get('/pendingApproval', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.viewPendingApprovalRecords(req, res))
 
-router.get('/support/new', (req, res)=> res.render('error', {error: "Page coming soon"}))
+router.get('/support/new', (req, res)=> res.render('record/support/new'))
+
+router.post('/support/new', (req,res)=> res.render('index'))
 
 router.get('/test/new', (req, res)=> res.render('record/test/new'))
 
