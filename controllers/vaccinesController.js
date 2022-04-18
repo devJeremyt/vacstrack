@@ -38,7 +38,7 @@ exports.addVacsRecord = async function(req, res){
         if(err){
             console.log(err)
         }
-        res.render('record/new')
+        res.render('index')
     })
 }
 
