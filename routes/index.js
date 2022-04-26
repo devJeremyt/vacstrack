@@ -11,4 +11,6 @@ router.get('/problem', (req, res)=> res.render('reportProblem'))
 
 router.post('/problem', (req, res)=> res.render('index'))
 
+router.get('/help', (req, res)=> res.render('help'))
+
 module.exports = router;

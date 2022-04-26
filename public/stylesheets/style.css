@@ -111,3 +111,11 @@ p.card-text{
   bottom: 1rem;
 }
 
+section >*{
+  color: white;
+}
+
+.container>h1{
+  color: white
+}
+
