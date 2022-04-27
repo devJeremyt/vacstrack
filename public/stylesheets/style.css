@@ -119,3 +119,29 @@ section >*{
   color: white
 }
 
+circle{
+  fill: red;
+  stroke: green;
+  stroke-width: 600;
+  stroke-dasharray: 1449 1885;
+}
+
+svg{
+  transform: rotate(-90deg);
+  background: red;
+  border-radius: 50%;
+}
+
+#legend-unvaccinated{
+  display: inline-block;
+  background-color: red;
+  width: 10px;
+  height: 10px;
+}
+
+#legend-vaccinated{
+  display: inline-block;
+  background-color: green;
+  width: 10px;
+  height: 10px;
+}

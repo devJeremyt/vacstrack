@@ -13,4 +13,9 @@ router.post('/new', (req, res)=>{
 router.get('/search', (req, res)=>{
   controller.searchVaccine(req, res)
 })
+
+router.get('/report', (req, res)=> res.render('vaccination/report'))
+
+// router.get('/covidrates' (req, res)=> controller.getCovidRates)
+
 module.exports = router;
