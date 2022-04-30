@@ -17,6 +17,8 @@ router.post('/new', (req, res)=>{
 
 router.get('/edit', (req, res)=>vaccinesController.editRecord(req, res))
 
+router.get('/specificrecord', (req, res)=> vaccinesController.viewSpecificRecord(req, res))
+
 router.post('/edit', (req,res)=>vaccinesController.submitRecordEdit(req, res))
 
 router.get('/pendingApproval', authorize(['HR Representative', 'Administrator']), (req, res)=> vaccinesController.viewPendingApprovalRecords(req, res))

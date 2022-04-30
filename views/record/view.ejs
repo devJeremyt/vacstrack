@@ -1,0 +1,27 @@
+<%-include("../partials/header.ejs")%>
+<main>
+    <div class="container center">
+        <form id="editRecordForm" action="#"></form>
+            <input type="text" id="recordID" name="recordID" hidden value="<%=record.recordID%>">
+            <input type="text" id="vacsID" name="vacsID" hidden value="<%=record.vacsID%>">
+            <section class="form-group">
+                <label for="vaccine">Vaccine</label>
+                <input class="form-control col-md-3" id="vaccine" name="vaccine" type="text"required autocomplete="off" value="<%=record.name%>" disabled>
+            </section>
+            <section class="form-group">
+                <label for="dateTaken">Date Taken</label>
+                <input class="form-control col-md-3" id="dateTaken" name="dateTaken" type="text" required autocomplete="off" value="<%=new Date(record.date).toLocaleDateString()%>" disabled>
+            </section>
+            <section class="form-group">
+                <label for="doseNumber">Dose Number</label>
+                <input class="form-control col-md-3" id="doseNumber" name="doseNumber" type="text" required autocomplete="off" value="<%=record.doseNumber%>" disabled>
+            </section>
+            <section class="form-group">
+                <label for="location">Location</label>
+                <input class="form-control col-md-3" id="location" name="location" type="text" required autocomplete="off" value="<%=record.location%>" disabled>
+            </section>
+            <a class="btn btn-primary" href="/records/markApproved?recordId=<%=record.recordID%>">Approve</a>
+        </form>
+    </div>
+</main>
+<%-include("../partials/footer.ejs")%>

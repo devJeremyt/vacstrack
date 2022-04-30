@@ -169,6 +169,27 @@ exports.viewIndividualRecord = async function(req, res){
     })
 }
 
+exports.viewSpecificRecord = async function(req, res){
+    let pool = await poolPromise
+
+    pool.request()
+    .input('recordID', sql.Int, req.query.recordId)
+    .query(
+        'SELECT * FROM tbVacsRecords AS VR ' + 
+        'INNER JOIN TbPerson AS PS ON PS.persKey = VR.persKey ' +
+        'INNER JOIN TbVaccines AS VA ON VA.vacsId = VR.vacsId ' +
+        'WHERE VR.recordID = @recordID', (err, result)=>{
+            if(err){
+                console.log(err)
+                res.render('error', {error: err})
+            }
+
+            console.log(result.recordset)
+        res.render('record/view', {record : result.recordset[0]})
+        }
+    )
+}
+
 exports.editRecord = async function(req, res){
     let pool = await poolPromise
     try {

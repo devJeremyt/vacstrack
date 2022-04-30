@@ -16,7 +16,7 @@
         <tbody>
             <%for(let i = 0; i < records.length; i++){ %>
                 <tr>
-                    <td><a href="/records/markApproved?recordId=<%=records[i].recordID%>">Approve</a> / <a href="#">View</a></td>
+                    <td><a href="/records/markApproved?recordId=<%=records[i].recordID%>">Approve</a> / <a href="/records/specificrecord?recordId=<%=records[i].recordID%>">View</a></td>
                     <td><%=records[i].firstName%></td>
                     <td><%=records[i].lastName%></td>
                     <td><%=records[i].vacsName%></td>
